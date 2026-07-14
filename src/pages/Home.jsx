@@ -1,7 +1,6 @@
 import Contact from "../components/home/Contact";
 import About from "../components/home/About";
 import Portfolio from "../components/home/Portfolio";
-import Trusted from "../components/home/Trusted";
 import Navbar from "../components/layout/Navbar";
 import Hero from "../components/home/Hero";
 import Features from "../components/home/Features";
@@ -14,7 +13,6 @@ function Home() {
     <>
       <Navbar />
       <Hero />
-      <Trusted />
       <Features />
       <Portfolio />
       <About />
