@@ -107,7 +107,11 @@ console.log("Submit button clicked");
 />
 
           <button
-  type="submit"
+  type="button"
+  onClick={() => {
+    console.log("Button Clicked");
+    alert("Button Clicked");
+  }}
   className="md:col-span-2 bg-blue-600 hover:bg-blue-700 rounded-xl py-4 text-white font-semibold"
 >
   Send Request
