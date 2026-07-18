@@ -2,52 +2,34 @@ import { useState } from "react";
 import axios from "axios";
 
 function Contact() {
-
-
   const [formData, setFormData] = useState({
-  name: "",
-  email: "",
-  phone: "",
-  businessType: "",
-  message: "",
-});
-
-const handleChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value,
+    name: "",
+    email: "",
+    phone: "",
+    businessType: "",
+    message: "",
   });
-};
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-console.log("Submit button clicked");
-
-  try {
-    const res = await axios.post(
-      "https://iana-studio.onrender.com/api/contact",
-      formData
-    );
-
-    alert(res.data.message);
-
+  const handleChange = (e) => {
     setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      businessType: "",
-      message: "",
+      ...formData,
+      [e.target.name]: e.target.value,
     });
-  } catch (err) {
-    alert("Something went wrong!");
-    console.log(err);
-  }
-};
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("Submit button clicked");
+    alert("handleSubmit chal gaya!");
+
+    // Abhi API call temporarily band hai.
+    // Pehle dekhte hain submit chal raha hai ya nahi.
+  };
+
   return (
     <section id="contact" className="bg-black py-24">
       <div className="max-w-5xl mx-auto px-6">
-
         <h2 className="text-5xl font-bold text-center text-white">
           Get Your Free Quote
         </h2>
@@ -57,68 +39,61 @@ console.log("Submit button clicked");
         </p>
 
         <form
-  onSubmit={handleSubmit}
-  className="grid md:grid-cols-2 gap-6 mt-14"
->
+          onSubmit={handleSubmit}
+          className="grid md:grid-cols-2 gap-6 mt-14"
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
+          />
 
           <input
-  type="text"
-  name="name"
-  placeholder="Your Name"
-  value={formData.name}
-  onChange={handleChange}
-  className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
-/>
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
+          />
 
           <input
-  type="email"
-  name="email"
-  placeholder="Email Address"
-  value={formData.email}
-  onChange={handleChange}
-  className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
-/>
+            type="text"
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
+          />
 
           <input
-  type="text"
-  name="phone"
-  placeholder="Phone Number"
-  value={formData.phone}
-  onChange={handleChange}
-  className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
-/>
-
-          <input
-  type="text"
-  name="businessType"
-  placeholder="Business Type"
-  value={formData.businessType}
-  onChange={handleChange}
-  className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
-/>
+            type="text"
+            name="businessType"
+            placeholder="Business Type"
+            value={formData.businessType}
+            onChange={handleChange}
+            className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
+          />
 
           <textarea
-  rows="6"
-  name="message"
-  placeholder="Tell us about your project..."
-  value={formData.message}
-  onChange={handleChange}
-  className="md:col-span-2 bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
-/>
+            rows="6"
+            name="message"
+            placeholder="Tell us about your project..."
+            value={formData.message}
+            onChange={handleChange}
+            className="md:col-span-2 bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
+          />
 
           <button
-  type="button"
-  onClick={() => {
-    console.log("Button Clicked");
-    alert("Button Clicked");
-  }}
-  className="md:col-span-2 bg-blue-600 hover:bg-blue-700 rounded-xl py-4 text-white font-semibold"
->
-  Send Request
-</button>
-
+            type="submit"
+            className="md:col-span-2 bg-blue-600 hover:bg-blue-700 rounded-xl py-4 text-white font-semibold"
+          >
+            Send Request
+          </button>
         </form>
-
       </div>
     </section>
   );
