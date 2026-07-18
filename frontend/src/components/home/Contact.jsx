@@ -26,7 +26,7 @@ console.log("Submit button clicked");
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/contact",
+      "https://iana-studio.onrender.com/api/contact",
       formData
     );
 
