@@ -88,11 +88,12 @@ function Contact() {
           />
 
           <button
-            type="submit"
-            className="md:col-span-2 bg-blue-600 hover:bg-blue-700 rounded-xl py-4 text-white font-semibold"
-          >
-            Send Request
-          </button>
+  type="button"
+  onClick={() => alert("Button Clicked")}
+  className="md:col-span-2 bg-blue-600 hover:bg-blue-700 rounded-xl py-4 text-white font-semibold"
+>
+  Send Request
+</button>
         </form>
       </div>
     </section>
