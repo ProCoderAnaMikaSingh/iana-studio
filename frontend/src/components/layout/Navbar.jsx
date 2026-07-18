@@ -51,12 +51,12 @@ function Navbar() {
         </ul>
 
         {/* Desktop Button */}
-       <a
-  href="#contact"
+       <Link
+  to="/contact"
   className="hidden md:block bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-lg text-white font-semibold"
 >
   Get Quote
-</a>
+</Link>
 
         {/* Mobile Icon */}
         <button
