@@ -2,10 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 
 function Contact() {
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    business: "",
+    phone: "",
+    businessType: "",
     message: "",
   });
 
@@ -19,7 +22,7 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
+    setLoading(true);
 
     try {
       const res = await axios.post(
@@ -32,12 +35,15 @@ function Contact() {
       setFormData({
         name: "",
         email: "",
-        business: "",
+        phone: "",
+        businessType: "",
         message: "",
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       alert("Something went wrong!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,6 +69,7 @@ function Contact() {
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
+            required
             className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
           />
 
@@ -72,14 +79,25 @@ function Contact() {
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
+            required
             className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
           />
 
           <input
             type="text"
-            name="business"
-            placeholder="Business / Company"
-            value={formData.business}
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+          />
+
+          <input
+            type="text"
+            name="businessType"
+            placeholder="Business Type"
+            value={formData.businessType}
             onChange={handleChange}
             className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
           />
@@ -90,14 +108,16 @@ function Contact() {
             placeholder="Tell us about your project..."
             value={formData.message}
             onChange={handleChange}
+            required
             className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
           />
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition py-4 rounded-xl font-bold"
+            disabled={loading}
+            className="w-full bg-blue-600 hover:bg-blue-700 transition py-4 rounded-xl font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Project Request
+            {loading ? "Sending..." : "Send Project Request"}
           </button>
 
         </form>
