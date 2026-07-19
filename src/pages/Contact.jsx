@@ -19,7 +19,7 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    alert("handleSubmit chal gaya!");
+    
 
     try {
       const res = await axios.post(
