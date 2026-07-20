@@ -3,8 +3,9 @@ import axios from "axios";
 
 function Contact() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,38 +21,42 @@ function Contact() {
       [e.target.name]: e.target.value,
     });
 
-    setError("");
-    setSuccess("");
+    setErrors({
+      ...errors,
+      [e.target.name]: "",
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
-    setSuccess("");
+    const newErrors = {};
 
     if (formData.name.trim().length < 3) {
-      setError("Name must be at least 3 characters.");
-      return;
+      newErrors.name = "Name must be at least 3 characters.";
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(formData.email)) {
-      setError("Please enter a valid email address.");
-      return;
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
     }
 
     if (!/^\d{10}$/.test(formData.phone)) {
-      setError("Phone number must contain exactly 10 digits.");
-      return;
+      newErrors.phone = "Phone number must be exactly 10 digits.";
     }
 
     if (formData.message.trim().length < 15) {
-      setError("Message must be at least 15 characters.");
+      newErrors.message =
+        "Project description must be at least 15 characters.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setSuccess("");
       return;
     }
 
+    setErrors({});
+    setSuccess("");
     setLoading(true);
 
     try {
@@ -69,9 +74,11 @@ function Contact() {
         businessType: "",
         message: "",
       });
+
     } catch (err) {
       console.error(err);
-      setError("Something went wrong. Please try again.");
+      setSuccess("");
+      alert("Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -92,68 +99,92 @@ function Contact() {
           Tell us about your project and we'll get back to you.
         </p>
 
-        {error && (
-          <div className="mt-8 bg-red-600/20 border border-red-500 text-red-300 rounded-xl p-4 text-center">
-            {error}
-          </div>
-        )}
-
         {success && (
-          <div className="mt-8 bg-green-600/20 border border-green-500 text-green-300 rounded-xl p-4 text-center">
+          <div className="mt-8 rounded-xl border border-green-500 bg-green-900/30 p-4 text-green-300 text-center">
             {success}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-12 space-y-6">
 
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
-          />
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            />
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
-          />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.name}
+              </p>
+            )}
+          </div>
 
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
-          />
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            />
 
-          <input
-            type="text"
-            name="businessType"
-            placeholder="Business Type"
-            value={formData.businessType}
-            onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
-          />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.email}
+              </p>
+            )}
+          </div>
 
-          <textarea
-            rows="6"
-            name="message"
-            placeholder="Tell us about your project..."
-            value={formData.message}
-            onChange={handleChange}
-            required
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500 resize-none"
-          />
+          <div>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            />
+
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.phone}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              type="text"
+              name="businessType"
+              placeholder="Business Type"
+              value={formData.businessType}
+              onChange={handleChange}
+              className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <textarea
+              rows="6"
+              name="message"
+              placeholder="Tell us about your project..."
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            />
+
+            {errors.message && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.message}
+              </p>
+            )}
+          </div>
 
           <button
             type="submit"
