@@ -21,6 +21,26 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+if (formData.name.trim().length < 3) {
+  alert("Name must be at least 3 characters.");
+  return;
+}
+
+if (!formData.email.includes("@")) {
+  alert("Please enter a valid email.");
+  return;
+}
+
+if (formData.phone.trim().length < 10) {
+  alert("Please enter a valid phone number.");
+  return;
+}
+
+if (formData.message.trim().length < 15) {
+  alert("Message must be at least 15 characters.");
+  return;
+}
 
     setLoading(true);
 
