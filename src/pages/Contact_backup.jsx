@@ -3,8 +3,6 @@ import axios from "axios";
 
 function Contact() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,38 +17,30 @@ function Contact() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-
-    setError("");
-    setSuccess("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+if (formData.name.trim().length < 3) {
+  alert("Name must be at least 3 characters.");
+  return;
+}
 
-    setError("");
-    setSuccess("");
+if (!formData.email.includes("@")) {
+  alert("Please enter a valid email.");
+  return;
+}
 
-    if (formData.name.trim().length < 3) {
-      setError("Name must be at least 3 characters.");
-      return;
-    }
+if (formData.phone.trim().length < 10) {
+  alert("Please enter a valid phone number.");
+  return;
+}
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(formData.email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    if (!/^\d{10}$/.test(formData.phone)) {
-      setError("Phone number must contain exactly 10 digits.");
-      return;
-    }
-
-    if (formData.message.trim().length < 15) {
-      setError("Message must be at least 15 characters.");
-      return;
-    }
+if (formData.message.trim().length < 15) {
+  alert("Message must be at least 15 characters.");
+  return;
+}
 
     setLoading(true);
 
@@ -60,7 +50,7 @@ function Contact() {
         formData
       );
 
-      setSuccess(res.data.message);
+      alert(res.data.message);
 
       setFormData({
         name: "",
@@ -71,7 +61,7 @@ function Contact() {
       });
     } catch (err) {
       console.error(err);
-      setError("Something went wrong. Please try again.");
+      alert("Something went wrong!");
     } finally {
       setLoading(false);
     }
@@ -83,7 +73,6 @@ function Contact() {
       className="min-h-screen bg-black text-white py-20 px-6"
     >
       <div className="max-w-3xl mx-auto">
-
         <h1 className="text-5xl font-bold text-center">
           Contact Us
         </h1>
@@ -92,19 +81,7 @@ function Contact() {
           Tell us about your project and we'll get back to you.
         </p>
 
-        {error && (
-          <div className="mt-8 bg-red-600/20 border border-red-500 text-red-300 rounded-xl p-4 text-center">
-            {error}
-          </div>
-        )}
-
-        {success && (
-          <div className="mt-8 bg-green-600/20 border border-green-500 text-green-300 rounded-xl p-4 text-center">
-            {success}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-12 space-y-6">
 
           <input
             type="text"
@@ -127,7 +104,7 @@ function Contact() {
           />
 
           <input
-            type="tel"
+            type="text"
             name="phone"
             placeholder="Phone Number"
             value={formData.phone}
@@ -152,7 +129,7 @@ function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500 resize-none"
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
           />
 
           <button
@@ -164,7 +141,6 @@ function Contact() {
           </button>
 
         </form>
-
       </div>
     </div>
   );
