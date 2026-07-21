@@ -2,10 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 
 function Contact() {
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    business: "",
+    phone: "",
+    businessType: "",
     message: "",
   });
 
@@ -19,11 +22,31 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Submit button clicked");
+    if (formData.name.trim().length < 3) {
+      alert("Name must be at least 3 characters.");
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      alert("Please enter a valid email.");
+      return;
+    }
+
+    if (formData.phone.trim().length < 10) {
+      alert("Please enter a valid phone number.");
+      return;
+    }
+
+    if (formData.message.trim().length < 15) {
+      alert("Message must be at least 15 characters.");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await axios.post(
-        "https://iana-studio.onrender.com/api/contact",
+        "http://localhost:5000/api/contact",
         formData
       );
 
@@ -32,12 +55,16 @@ function Contact() {
       setFormData({
         name: "",
         email: "",
-        business: "",
+        phone: "",
+        businessType: "",
         message: "",
       });
+
     } catch (err) {
       console.log(err);
       alert("Something went wrong!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,7 +91,8 @@ function Contact() {
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 text-white"
           />
 
           <input
@@ -73,16 +101,27 @@ function Contact() {
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 text-white"
           />
 
           <input
             type="text"
-            name="business"
-            placeholder="Business / Company"
-            value={formData.business}
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
             onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 text-white"
+          />
+
+          <input
+            type="text"
+            name="businessType"
+            placeholder="Business Type"
+            value={formData.businessType}
+            onChange={handleChange}
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 text-white"
           />
 
           <textarea
@@ -91,14 +130,16 @@ function Contact() {
             placeholder="Tell us about your project..."
             value={formData.message}
             onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 outline-none focus:border-blue-500"
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 text-white"
           />
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition py-4 rounded-xl font-bold"
+            disabled={loading}
+            className="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-xl font-bold disabled:opacity-50"
           >
-            Send Project Request
+            {loading ? "Sending..." : "Send Project Request"}
           </button>
 
         </form>
