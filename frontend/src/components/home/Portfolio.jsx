@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+import { Link } from "react-router-dom";
+
 function Portfolio() {
   const projects = [
     {
@@ -46,8 +48,11 @@ function Portfolio() {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.03 }}
-              className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-blue-500 transition"
+              whileHover={{
+  scale: 1.04,
+  y: -8,
+}}
+              className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-blue-500 hover:shadow-blue-500/20 hover:shadow-xl transition-all duration-300"
             >
               <div className="h-52 bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 flex items-center justify-center text-6xl">
                 💻
@@ -63,9 +68,12 @@ function Portfolio() {
     {project.category}
   </p>
 
-  <button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 transition py-3 rounded-xl text-white font-semibold">
-    View Project
-  </button>
+  <Link
+  to="/contact"
+  className="block mt-6 w-full text-center bg-blue-600 hover:bg-blue-700 transition py-3 rounded-xl text-white font-semibold"
+>
+  Start Similar Project
+</Link>
 
 </div>
 

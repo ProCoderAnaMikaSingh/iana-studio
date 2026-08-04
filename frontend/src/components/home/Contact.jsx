@@ -18,14 +18,30 @@ function Contact() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    console.log("Submit button clicked");
-    alert("handleSubmit chal gaya!");
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/contact",
+      formData
+    );
 
-    // Abhi API call temporarily band hai.
-    // Pehle dekhte hain submit chal raha hai ya nahi.
-  };
+    if (response.data.success) {
+      alert("Request Submitted Successfully ✅");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        businessType: "",
+        message: "",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Something went wrong!");
+  }
+};
 
   return (
     <section id="contact" className="bg-black py-24">
@@ -45,18 +61,24 @@ function Contact() {
           <input
             type="text"
             name="name"
+            required
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
+            required
+minLength={3}
+maxLength={50}
             className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
           />
 
           <input
             type="email"
             name="email"
+            required
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
+            required
             className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
           />
 
@@ -66,6 +88,9 @@ function Contact() {
             placeholder="Phone Number"
             value={formData.phone}
             onChange={handleChange}
+            required
+minLength={10}
+maxLength={10}
             className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
           />
 
@@ -75,10 +100,13 @@ function Contact() {
             placeholder="Business Type"
             value={formData.businessType}
             onChange={handleChange}
+            required
+minLength={20}
             className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-white outline-none"
           />
 
           <textarea
+          required
             rows="6"
             name="message"
             placeholder="Tell us about your project..."
@@ -88,12 +116,13 @@ function Contact() {
           />
 
           <button
-  type="button"
-  onClick={() => alert("Button Clicked")}
-  className="md:col-span-2 bg-blue-600 hover:bg-blue-700 rounded-xl py-4 text-white font-semibold"
+  type="submit"
+  className="md:col-span-2 bg-blue-600 hover:bg-blue-700 hover:scale-[1.02] transition-all duration-300 rounded-xl py-4 text-white font-semibold"
 >
   Send Request
 </button>
+
+
         </form>
       </div>
     </section>

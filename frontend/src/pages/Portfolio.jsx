@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaGithub } from "react-icons/fa";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 function Portfolio() {
   
@@ -13,7 +15,10 @@ useEffect(() => {
 
 const fetchProjects = async () => {
   try {
-    const res = await axios.get("https://iana-studio.onrender.com/api/projects");
+    const res = await axios.get("http://localhost:5000/api/projects");
+
+    console.log(res.data);
+    
     setProjects(res.data.projects);
   } catch (error) {
     console.log(error);
@@ -21,7 +26,10 @@ const fetchProjects = async () => {
 };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <>
+  <Navbar />
+
+  <div className="min-h-screen bg-black text-white">
 
       {/* Header */}
       <section className="text-center py-20 px-6">
@@ -44,9 +52,13 @@ const fetchProjects = async () => {
             className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-blue-500 transition"
           >
             {/* Placeholder Image */}
-            <div className="h-52 bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 flex items-center justify-center text-6xl">
-              🌐
-            </div>
+            <div className="h-52 overflow-hidden">
+  <img
+  src="/restaurant-preview.jpg"
+  alt={project.title}
+  className="w-full h-full object-cover hover:scale-105 duration-500"
+/>
+</div>
 
             <div className="p-6">
 
@@ -64,15 +76,36 @@ const fetchProjects = async () => {
 
               <div className="flex gap-4 mt-6">
 
-                <button className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg flex items-center gap-2">
-                  Live Demo
-                  <FaArrowRight />
-                </button>
+    {project.title === "Restaurant Website" ? (
+  <Link
+    to="/restaurant"
+    className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg flex items-center gap-2"
+  >
+    Live Demo
+    <FaArrowRight />
+  </Link>
+) : (
+  <a
+    href={project.live_link}
+    target="_blank"
+    rel="noreferrer"
+    className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg flex items-center gap-2"
+  >
+    Live Demo
+    <FaArrowRight />
+  </a>
+)}        
 
-                <button className="border border-gray-700 hover:border-blue-500 px-5 py-3 rounded-lg flex items-center gap-2">
-                  <FaGithub />
-                  GitHub
-                </button>
+ 
+                <a
+  href={project.github_link}
+  target="_blank"
+  rel="noreferrer"
+  className="border border-gray-700 hover:border-blue-500 px-5 py-3 rounded-lg flex items-center gap-2"
+>
+  <FaGithub />
+  GitHub
+</a>
 
               </div>
 
@@ -98,10 +131,13 @@ const fetchProjects = async () => {
         >
           Contact Us
         </Link>
-      </section>
+            </section>
 
     </div>
-  );
+
+    <Footer />
+  </>
+);
 }
 
 export default Portfolio;

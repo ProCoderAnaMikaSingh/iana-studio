@@ -1,8 +1,10 @@
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FaCode, FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
+
 
 function Navbar() {
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -19,9 +21,15 @@ function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-gray-300 font-medium">
-          <li><Link to="/" className="hover:text-blue-500 transition">
-                  Home
-                </Link>
+          <li>{location.pathname === "/" ? (
+  <a href="#" className="hover:text-blue-500 transition">
+    Home
+  </a>
+) : (
+  <Link to="/" className="hover:text-blue-500 transition">
+    Home
+  </Link>
+)}
             </li>
 
           <li>
@@ -43,20 +51,35 @@ function Navbar() {
           </li>
 
           <li>
-                <Link to="/contact" className="hover:text-blue-500 transition">
-                  Contact
-                </Link>
-          </li>
+  {location.pathname === "/" ? (
+  <a href="#contact" className="hover:text-blue-500 transition">
+    Contact
+  </a>
+) : (
+  <Link to="/contact" className="hover:text-blue-500 transition">
+    Contact
+  </Link>
+)}
+</li>
 
         </ul>
 
         {/* Desktop Button */}
-       <Link
-  to="/contact"
-  className="hidden md:block bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-lg text-white font-semibold"
->
-  Get Quote
-</Link>
+       {location.pathname === "/" ? (
+  <a
+    href="#contact"
+    className="hidden md:block bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-lg text-white font-semibold"
+  >
+    Get Quote
+  </a>
+) : (
+  <Link
+    to="/contact"
+    className="hidden md:block bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-lg text-white font-semibold"
+  >
+    Get Quote
+  </Link>
+)}
 
         {/* Mobile Icon */}
         <button
@@ -74,8 +97,16 @@ function Navbar() {
           <ul className="flex flex-col gap-5 text-gray-300 font-medium">
 
   <li>
-    <Link to="/">Home</Link>
-  </li>
+  {location.pathname === "/" ? (
+    <a href="#" onClick={() => setMenuOpen(false)}>
+      Home
+    </a>
+  ) : (
+    <Link to="/" onClick={() => setMenuOpen(false)}>
+      Home
+    </Link>
+  )}
+</li>
 
   <li>
     <Link to="/services">Services</Link>
@@ -90,17 +121,35 @@ function Navbar() {
   </li>
 
   <li>
-    <Link to="/contact">Contact</Link>
-  </li>
+  {location.pathname === "/" ? (
+    <a href="#contact" onClick={() => setMenuOpen(false)}>
+      Contact
+    </a>
+  ) : (
+    <Link to="/contact" onClick={() => setMenuOpen(false)}>
+      Contact
+    </Link>
+  )}
+</li>
 
 </ul>
 
-          <Link
-  to="/contact"
-  className="block mt-6 w-full text-center bg-blue-600 hover:bg-blue-700 py-3 rounded-lg text-white font-semibold"
->
-  Get Quote
-</Link>
+          {location.pathname === "/" ? (
+  <a
+    href="#contact"
+    className="block mt-6 w-full text-center bg-blue-600 hover:bg-blue-700 py-3 rounded-lg text-white font-semibold"
+  >
+    Get Quote
+  </a>
+) : (
+  <Link
+    to="/contact"
+    onClick={() => setMenuOpen(false)}
+    className="block mt-6 w-full text-center bg-blue-600 hover:bg-blue-700 py-3 rounded-lg text-white font-semibold"
+  >
+    Get Quote
+  </Link>
+)}
         </div>
       )}
     </nav>

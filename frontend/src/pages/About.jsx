@@ -1,7 +1,13 @@
 import { FaCheckCircle } from "react-icons/fa";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
 
 function About() {
   return (
+  <>
+    <Navbar />
+
     <div className="min-h-screen bg-black text-white py-20 px-6">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
@@ -56,9 +62,12 @@ function About() {
 
         </div>
 
-      </div>
+           </div>
     </div>
-  );
+
+    <Footer />
+  </>
+);
 }
 
 export default About;

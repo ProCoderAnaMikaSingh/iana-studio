@@ -20,7 +20,7 @@ function About() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <div className="h-[420px] rounded-3xl bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 flex items-center justify-center text-8xl shadow-2xl">
+         <div className="h-[420px] rounded-3xl bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 flex items-center justify-center text-8xl shadow-2xl hover:scale-105 transition-all duration-500">
             👩‍💻
           </div>
         </motion.div>
@@ -52,9 +52,12 @@ function About() {
             ))}
           </div>
 
-          <button className="mt-10 bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl text-white font-semibold">
-            Learn More
-          </button>
+         <a
+  href="#contact"
+  className="inline-block mt-10 bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl text-white font-semibold"
+>
+  Contact Now
+</a>
         </motion.div>
 
       </div>

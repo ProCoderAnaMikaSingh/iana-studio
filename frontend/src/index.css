@@ -1,1 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+.luxury-font{
+  font-family: 'Cormorant Garamond', serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+

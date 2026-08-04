@@ -41,8 +41,11 @@ function Pricing() {
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -8 }}
-              className="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center"
+              whileHover={{
+  y: -8,
+  scale: 1.03,
+}}
+              className="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center hover:border-blue-500 hover:shadow-blue-500/20 hover:shadow-xl transition-all duration-300"
             >
               <div className="text-5xl font-bold text-blue-500">
                 {step.number}

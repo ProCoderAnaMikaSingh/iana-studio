@@ -19,9 +19,9 @@ function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="bg-blue-500/20 border border-blue-500 text-blue-400 px-4 py-2 rounded-full text-sm">
-            🚀 Premium Web Development Agency
-          </span>
+          <span className="inline-flex flex-wrap items-center bg-blue-500/20 border border-blue-500 text-blue-400 px-4 py-2 rounded-full text-sm">
+  🚀 Premium Web Development Agency
+</span>
 
           <h1 className="text-5xl md:text-7xl font-extrabold mt-8 leading-tight">
             We Build
@@ -39,13 +39,13 @@ function Hero() {
 
           <div className="flex flex-wrap gap-5 mt-10">
 
-            <Link
-  to="/contact"
+            <a
+  href="#contact"
   className="bg-blue-600 hover:bg-blue-700 transition px-7 py-4 rounded-xl flex items-center gap-3 font-semibold"
 >
   Get Free Quote
   <FaArrowRight />
-</Link>
+</a>
 
             <Link
   to="/portfolio"

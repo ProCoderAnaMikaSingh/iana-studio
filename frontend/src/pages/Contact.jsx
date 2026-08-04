@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
 function Contact() {
   const [loading, setLoading] = useState(false);
 
@@ -69,6 +72,9 @@ function Contact() {
   };
 
   return (
+  <>
+    <Navbar />
+
     <div
       id="contact"
       className="min-h-screen bg-black text-white py-20 px-6"
@@ -142,11 +148,14 @@ function Contact() {
             {loading ? "Sending..." : "Send Project Request"}
           </button>
 
-        </form>
+                </form>
 
       </div>
     </div>
-  );
+
+    <Footer />
+  </>
+);
 }
 
 export default Contact;

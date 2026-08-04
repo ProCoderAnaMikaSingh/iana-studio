@@ -60,8 +60,11 @@ function Features() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -8 }}
-              className="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-blue-500 transition"
+              whileHover={{
+  y: -8,
+  scale: 1.03,
+}}
+              className="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-blue-500 hover:shadow-blue-500/20 hover:shadow-xl transition-all duration-300"
             >
               <div className="text-blue-500 mb-5">
                 {service.icon}

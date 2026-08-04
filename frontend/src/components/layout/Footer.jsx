@@ -23,8 +23,8 @@ function Footer() {
           </p>
 
            <div className="mt-6 space-y-2 text-gray-400">
-    <p>📧 contact@ianastudio.com</p>
-    <p>📱 +91 XXXXX XXXXX</p>
+    <p>📧 ianastudio@gmail.com</p>
+    <p>📱 +91 9876543210</p>
     <p>📍 India</p>
   </div>
 
@@ -72,11 +72,40 @@ function Footer() {
           </h3>
 
           <div className="flex gap-5 text-2xl">
-            <FaFacebook className="hover:text-blue-500 cursor-pointer" />
-            <FaInstagram className="hover:text-pink-500 cursor-pointer" />
-            <FaLinkedin className="hover:text-blue-400 cursor-pointer" />
-            <FaGithub className="hover:text-gray-300 cursor-pointer" />
-          </div>
+
+  <a
+    href="https://facebook.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaFacebook className="hover:text-blue-500 cursor-pointer transition" />
+  </a>
+
+  <a
+    href="https://instagram.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaInstagram className="hover:text-pink-500 cursor-pointer transition" />
+  </a>
+
+  <a
+    href="https://linkedin.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaLinkedin className="hover:text-blue-400 cursor-pointer transition" />
+  </a>
+
+  <a
+    href="https://github.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaGithub className="hover:text-white cursor-pointer transition" />
+  </a>
+
+</div>
         </div>
 
       </div>

@@ -1,25 +1,46 @@
 import { FaLaptopCode, FaMobileAlt, FaRocket } from "react-icons/fa";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
 
 function Services() {
-  const services = [
-    {
-      icon: <FaLaptopCode size={40} />,
-      title: "Website Development",
-      desc: "Modern, responsive and fast websites for your business.",
-    },
-    {
-      icon: <FaMobileAlt size={40} />,
-      title: "Responsive Design",
-      desc: "Perfect experience on mobile, tablet and desktop.",
-    },
-    {
-      icon: <FaRocket size={40} />,
-      title: "Startup Launch",
-      desc: "Complete website setup to launch your startup online.",
-    },
-  ];
+ const services = [
+  {
+    icon: <FaLaptopCode size={40} />,
+    title: "Business Website",
+    desc: "Professional websites for startups, local businesses and companies.",
+  },
+  {
+    icon: <FaMobileAlt size={40} />,
+    title: "Responsive Website",
+    desc: "Perfect experience across mobile, tablet and desktop devices.",
+  },
+  {
+    icon: <FaRocket size={40} />,
+    title: "Startup Website",
+    desc: "Launch your startup with a modern premium website.",
+  },
+  {
+    icon: <FaLaptopCode size={40} />,
+    title: "Portfolio Website",
+    desc: "Beautiful personal portfolio websites for freelancers and creators.",
+  },
+  {
+    icon: <FaRocket size={40} />,
+    title: "Landing Page",
+    desc: "High-converting landing pages for marketing campaigns.",
+  },
+  {
+    icon: <FaMobileAlt size={40} />,
+    title: "Website Maintenance",
+    desc: "Bug fixing, updates and long-term website support.",
+  },
+];
 
   return (
+  <>
+    <Navbar />
+
     <div className="min-h-screen bg-black text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
 
@@ -55,9 +76,12 @@ function Services() {
 
         </div>
 
-      </div>
+            </div>
     </div>
-  );
+
+    <Footer />
+  </>
+);
 }
 
 export default Services;
